@@ -19,11 +19,13 @@ Decided on 24 November 2026 unless dated otherwise.
 | D9 | **Pool = the whole league:** no minimum games or minutes filter | We need to see everyone. Thresholds can be added later as toggles, for display only. |
 | D10 | **Finances (salaries) deferred** | nba_api has no salary data. A second source will be needed (Basketball Reference, Spotrac or HoopsHype). |
 | D11 | **Publication: the GitHub README first, a Substack write-up later** | The README is the public record of findings. The repository is public. |
+| D12 | **A season's possible games = the games his team(s) played while he was on the roster** (was O1). Covers traded players, mid-season signings and players waived mid-season. A player on a roster for a whole season without playing counts at zero games played | Caveat: NBA.com has no roster dates. Stints will be worked out from game logs and roster snapshots; how gaps around trades are split is an implementation choice to be shown to the user before use. |
+| D13 | **Regular season only** (was O2) | Playoffs are a different question and are left out of Model 1. |
+| D14 | **Seasons: 2020-21 onwards,** six complete seasons to 2025-26; 2026-27 shown separately as a season in progress (was O3) | Start small. Skips 2019-20, when the season was suspended, only 22 teams entered the bubble and teams played 63 to 75 games. 2020-21 was still 72 games, which possible games handle. For players who debuted earlier, possible games simply start at 2020-21. |
+| D15 | **COVID health and safety protocol absences count against the player** (2020-21, 2021-22), as D2 requires | Keeps Model 1 simple: no absence reasons needed. On the revisit list: a sensitivity check without protocol games, and a caveat in the README. |
 
 ## Open (to be decided before the numbers are run)
 
 | # | Question | Recommendation |
 |---|---|---|
-| O1 | **How are a season's possible games counted** for traded players, mid-season signings, players who miss a whole season after their debut (no row in season stats), and players waived or retired mid-season? | Possible games = the games played by his team(s) while he was on the roster, with whole missed seasons included at zero games played. Needs roster data (`CommonTeamRoster`) on top of season stats. |
-| O2 | **Regular season only, or playoffs too?** | Regular season only for Model 1; playoffs kept in a separate table for later. |
-| O3 | **Which seasons?** | 1996-97 onwards (where NBA.com stats are complete), with 2026-27 shown separately as a season in progress. |
+| | None at present | |
