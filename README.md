@@ -71,6 +71,7 @@ Every rule, with its reason, is in [docs/DECISIONS.md](docs/DECISIONS.md).
 | [0_data](notebooks/0_data.ipynb) | The data, checked: team games, Embiid's seasons, players who missed whole seasons, and how player moves are dated |
 | [1_possible_games](notebooks/1_possible_games.ipynb) | Possible games for every player, checked against well-known cases |
 | [2_model_1](notebooks/2_model_1.ipynb) | Points per game against points per possible game, every season |
+| [3_all_stats](notebooks/3_all_stats.ipynb) | Points, assists, rebounds, steals, blocks and stocks: top 10 per game against top 10 per possible game, every season |
 
 ## Data and reproducing
 

@@ -22,6 +22,7 @@ How stint boundaries are set, in order of preference:
 import pandas as pd
 
 JOIN = ["Signing", "Trade", "AwardOnWaivers"]
+COUNTING = ["pts", "reb", "ast", "stl", "blk", "stk"]  # stk = stocks (steals + blocks)
 DAY = pd.Timedelta(days=1)
 
 
@@ -122,11 +123,17 @@ def player_seasons(stints, P, R):
     agg = stints.groupby(["season", "player_id"]).agg(
         possible_games=("possible", "sum"), teams=("team_id", "nunique"),
         undated=("dated", lambda x: not x.all()), two_way=("two_way", "any"), ten_day=("ten_day", "any"))
-    box = P.groupby(["season", "player_id"]).agg(gp=("game_id", "nunique"), pts=("pts", "sum"), min=("min", "sum"))
-    df = agg.join(box).fillna({"gp": 0, "pts": 0, "min": 0}).reset_index()
+    box = P.groupby(["season", "player_id"]).agg(
+        gp=("game_id", "nunique"), min=("min", "sum"), **{s: (s, "sum") for s in ["pts", "reb", "ast", "stl", "blk"]})
+    box["stk"] = box.stl + box.blk  # stocks = steals + blocks
+    counts = ["gp", "min"] + COUNTING
+    df = agg.join(box).fillna({c: 0 for c in counts}).reset_index()
     names = pd.concat([P[["player_id", "player_name"]], R[["player_id", "player_name"]]]).drop_duplicates("player_id")
     df = df.merge(names, on="player_id", how="left")
-    df[["gp", "pts", "min"]] = df[["gp", "pts", "min"]].astype(int)
+    df[counts] = df[counts].astype(int)
+    for stat in COUNTING:  # XPPG (D4): per game played, and per possible game
+        df[f"{stat}_pg"] = df[stat] / df.gp.where(df.gp > 0)
+        df[f"{stat}_ppg"] = df[stat] / df.possible_games
     df["ppg"] = df.pts / df.gp.where(df.gp > 0)
     df["pppg"] = df.pts / df.possible_games
     df["ppm"] = df.pts / df["min"].where(df["min"] > 0)
