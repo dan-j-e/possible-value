@@ -23,6 +23,8 @@ Decided on 24 November 2026 unless dated otherwise.
 | D13 | **Regular season only** (was O2) | Playoffs are a different question and are left out of Model 1. |
 | D14 | **Seasons: 2020-21 onwards,** six complete seasons to 2025-26; 2026-27 shown separately as a season in progress (was O3) | Start small. Skips 2019-20, when the season was suspended, only 22 teams entered the bubble and teams played 63 to 75 games. 2020-21 was still 72 games, which possible games handle. For players who debuted earlier, possible games simply start at 2020-21. |
 | D15 | **COVID health and safety protocol absences count against the player** (2020-21, 2021-22), as D2 requires | Keeps Model 1 simple: no absence reasons needed. On the revisit list: a sensitivity check without protocol games, and a caveat in the README. |
+| D16 | **Roster dates come from NBA.com's player-movement feed** (was O4): dated trades, waivers and signings since July 2015 (the data behind nba.com's transactions page; not wrapped by nba_api). **10-day contracts end 10 days after signing.** Where neither gives a date, the stint ends at the player's last appearance and the row is flagged | Notebook 0: the game logs cannot fix stint dates for 802 of 3,407 player-seasons (2020-21 to 2025-26). The feed gives a dated exit for 191 of the 325 waived players. Same source as the rest of the data (NBA.com), so the "nba_api only" rule is relaxed for this one feed. |
+| D17 | **Two-way players stay in the pool, with a note** (was O5): their stints are flagged, and every table or chart that includes them says so | A two-way contract limits how many NBA games a player may be active for, so some of his missed games are the contract, not his health. |
 
 ## Open (to be decided before the numbers are run)
 
